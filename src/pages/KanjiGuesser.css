@@ -1,0 +1,34 @@
+.kanji-choice {
+  min-width: 25vw;
+  font-size: 40px;
+}
+
+.japanese-reading {
+  font-size: 24px;
+}
+
+.english-translation {
+  font-size: 20px;
+}
+
+.furigana_section {
+  color: var(--ion-color-primary);
+}
+
+.main_word {
+  font-size: 40px;
+}
+
+.success {
+  color: var(--ion-color-success);
+}
+
+.danger,
+.failure {
+  color: var(--ion-color-danger);
+}
+
+.selected {
+  opacity: 1;
+  --opacity: 1;
+}

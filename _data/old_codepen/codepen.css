@@ -1,0 +1,76 @@
+body {
+  background-color: lightblue;
+  text-align: center;
+}
+
+#kanji {
+  color: #3334ff;
+}
+
+#vocab {
+  color: #aa3333;
+}
+
+#kanjivocab {
+  display: none;
+}
+
+#word_info {
+  font-family: "Noto Sans SC", serif;
+  line-height: 150%;
+  background-color: silver;
+  display: block;
+  width: auto;
+  padding: 2px;
+  border-style: solid;
+  border-radius: 10px;
+  margin: auto;
+}
+
+#kanji_text {
+  font-size: 60px;
+}
+
+header {
+  font-family: "Barlow Semi Condensed", sans-serif;
+  font-size: 30px;
+  background-color: lightgreen;
+  width: 100%;
+}
+
+.kanjibox {
+  font-family: "Noto Sans SC", serif;
+  font-size: 40px;
+  display: inline;
+  padding: 10px;
+  /*margin: 10px;*/
+  border-radius: 15px;
+  border: 2px solid hsl(340, 60%, 65%);
+  background-color: pink;
+}
+
+.kanjibox:hover {
+  animation-name: kanji-hover;
+  animation-duration: 350ms;
+  animation-fill-mode: forwards;
+}
+
+@keyframes kanji-hover {
+  100% {
+    background-color: hsl(348, 89%, 63%);
+    border: 2px solid hsl(340, 100%, 65%);
+  }
+}
+
+.kanjirow {
+  display: block;
+  line-height: 5em;
+}
+
+#choicebox {
+  margin: 30px auto 0px auto;
+  display: grid;
+  grid-template-columns: repeat(5, 100px);
+  grid-template-rows: 100px 100px;
+  grid-gap: 20px;
+}

@@ -1,0 +1,16 @@
+todo:
+  - prettier
+  - jest
+  - eslint
+  - webpack
+  - pug?
+  - typescript
+  - sass?
+  - ionic
+  - react
+  - redux
+  - circle CI
+
+links:
+  - Build features and components: https://ion.link/scaffolding-docs
+  - Run your app on a hardware or virtual device: https://ion.link/running-docs
