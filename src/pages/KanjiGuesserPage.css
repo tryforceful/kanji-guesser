@@ -1,9 +1,16 @@
 .kanji-choice {
   min-width: 25vw;
+  max-width: 30vw;
   font-size: 40px;
 }
 
-.japanese-reading {
+@media only screen and (min-width: 720px) {
+  .kanji-choice {
+    min-width: unset;
+  }
+}
+
+.japanese_reading {
   font-size: 24px;
 }
 
