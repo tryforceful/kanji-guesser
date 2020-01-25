@@ -21,15 +21,16 @@ const QuizQueryCard: React.FC<Props> = ({ currentQuizItem, userChoice }) => {
   const furiganaArr: JapaneseQueryStringArray | undefined = currentQuizItem.furigana
 
   return (
-    <IonCard>
+    <IonCard className="quiz-query-card">
       <IonCardHeader>
         <IonCardTitle class="ion-text-center">
           <span className="main_word">
-            {japaneseQueryArr.map(item =>
+            {japaneseQueryArr.map((item, idx) =>
               !isKanjiPlaceholder(item) ? (
                 item
               ) : (
                 <span
+                  key={idx}
                   className={classNames([
                     "furigana_section",
                     {
@@ -46,11 +47,12 @@ const QuizQueryCard: React.FC<Props> = ({ currentQuizItem, userChoice }) => {
         </IonCardTitle>
         <IonCardSubtitle class="ion-text-center">
           <span className="japanese_reading">
-            {(furiganaArr || japaneseQueryArr).map(item =>
+            {(furiganaArr || japaneseQueryArr).map((item, idx) =>
               !isKanjiPlaceholder(item) ? (
                 item
               ) : (
                 <span
+                  key={idx}
                   className={classNames([
                     "furigana_section",
                     {

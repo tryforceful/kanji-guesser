@@ -1,0 +1,14 @@
+@import "variables_old.css";
+
+body:not(.dark) {
+  ion-content {
+    --ion-background-color: #eefeff;
+  }
+  ion-card {
+    --background: white;
+  }
+}
+
+ion-card ion-card-content ul {
+  font-size: 20px;
+}

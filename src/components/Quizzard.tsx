@@ -1,5 +1,6 @@
 import {
   IonButton,
+  IonButtons,
   IonChip,
   IonCol,
   IonFab,
@@ -10,7 +11,7 @@ import {
   IonRow,
   IonToolbar
 } from "@ionic/react"
-import { play, refresh, thumbsDown, thumbsUp } from "ionicons/icons"
+import { exit, play, thumbsDown, thumbsUp } from "ionicons/icons"
 import React from "react"
 import { KanjiCharacter, QuizData, QuizItem } from "../data/QuizData"
 import KanjiButton from "./KanjiButton"
@@ -96,10 +97,12 @@ class Quizzard extends React.Component<Props, State> {
   render() {
     const StatusBar: JSX.Element = (
       <IonToolbar>
-        <IonButton color="medium" size="default" onClick={this.props.startOver}>
-          <IonIcon slot="start" icon={refresh} />
-          Start Over
-        </IonButton>
+        <IonButtons slot="start">
+          <IonButton color="medium" size="default" onClick={this.props.startOver}>
+            <IonIcon slot="start" icon={exit} />
+            End Quiz
+          </IonButton>
+        </IonButtons>
         <div slot="end">
           <IonChip color="success">
             <IonIcon icon={thumbsUp} />
@@ -121,7 +124,14 @@ class Quizzard extends React.Component<Props, State> {
           <IonRow class="ion-justify-content-around">
             {this.currentKanjiChoices.map((kanjiOption, index) => {
               return (
-                <IonCol key={index} sizeMd="4" class="ion-text-center">
+                <IonCol
+                  key={index}
+                  sizeXs="auto"
+                  sizeSm="4"
+                  sizeMd="3"
+                  sizeLg="auto"
+                  class="ion-text-center"
+                >
                   <KanjiButton
                     correctChoice={this.currentQuizItem.kanjiSlug}
                     thisButtonsKanji={kanjiOption}

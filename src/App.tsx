@@ -20,9 +20,11 @@ import Menu from "./components/Menu"
 import { AppPage } from "./declarations"
 import Home from "./pages/Home"
 import KanjiGuesserPage from "./pages/KanjiGuesserPage"
+import HeaderExample from "./pages/Sample"
 import Settings from "./pages/Settings"
+import "./theme/dark.css"
 /* Theme variables */
-import "./theme/variables.css"
+import "./theme/variables.scss"
 
 const appPages: AppPage[] = [
   {
@@ -39,6 +41,11 @@ const appPages: AppPage[] = [
     title: "Home Demo Page",
     url: "/home",
     icon: home
+  },
+  {
+    title: "Sample",
+    url: "/sample",
+    icon: home
   }
 ]
 
@@ -51,6 +58,7 @@ const App: React.FC = () => (
           <Route path="/home" component={Home} exact={true} />
           <Route path="/settings" component={Settings} exact={true} />
           <Route path="/kanji-guess" component={KanjiGuesserPage} exact={true} />
+          <Route path="/sample" component={HeaderExample} exact={true} />
           <Route path="/" render={() => <Redirect to="/kanji-guess" />} exact={true} />
         </IonRouterOutlet>
       </IonSplitPane>

@@ -1,6 +1,6 @@
 .kanji-choice {
-  min-width: 25vw;
-  max-width: 30vw;
+  /* min-width: 25vw;
+  max-width: 30vw; */
   font-size: 40px;
 }
 
@@ -16,6 +16,10 @@
 
 .english-translation {
   font-size: 20px;
+}
+
+ion-card-header.ios ~ ion-card-content.ios {
+  padding-top: 0;
 }
 
 .furigana_section {
@@ -38,4 +42,10 @@
 .selected {
   opacity: 1;
   --opacity: 1;
+}
+
+.quiz-query-card {
+  &.ios {
+    margin: 8px;
+  }
 }

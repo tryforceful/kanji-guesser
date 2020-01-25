@@ -26,7 +26,8 @@ const KanjiButton: React.FC<Props> = ({
         }
       ])}
       strong={false}
-      fill={!userChoice ? "outline" : "solid"}
+      fill="solid"
+      // {!userChoice ? "outline" : "solid"}
       disabled={!!userChoice}
       color={!userChoice ? "primary" : thisButtonsKanji === correctChoice ? "success" : "danger"}
       size="large"
