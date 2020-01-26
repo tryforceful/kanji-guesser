@@ -1,12 +1,17 @@
 import {
+  IonButton,
   IonButtons,
+  IonChip,
   IonContent,
   IonHeader,
+  IonIcon,
+  IonLabel,
   IonMenuButton,
   IonPage,
   IonTitle,
   IonToolbar
 } from "@ionic/react"
+import { exit, thumbsDown, thumbsUp } from "ionicons/icons"
 import React from "react"
 import FinishScreen from "../components/FinishScreen"
 import Quizzard from "../components/Quizzard"
@@ -24,6 +29,9 @@ export enum QuizzardState {
 
 interface State {
   quizState: QuizzardState
+
+  numCorrect: number
+  numIncorrect: number
 }
 
 class KanjiGuesser extends React.Component<Props, State> {
@@ -32,34 +40,59 @@ class KanjiGuesser extends React.Component<Props, State> {
   // }
 
   state: State = {
-    quizState: QuizzardState.NotYetStarted
+    quizState: QuizzardState.NotYetStarted,
+    numCorrect: 0,
+    numIncorrect: 0
   }
 
-  startStudy = () => {
+  startStudy = (): void => {
     this.setState({
-      quizState: QuizzardState.InProgress
+      quizState: QuizzardState.InProgress,
+      numCorrect: 0,
+      numIncorrect: 0
     })
   }
 
-  startOver = () => {
+  startOver = (): void => {
     this.setState({
       quizState: QuizzardState.Aborted
     })
   }
 
-  finish = () => {
+  finish = (): void => {
     this.setState({
       quizState: QuizzardState.Finished
     })
   }
 
+  incrementCorrect = (): void => {
+    this.setState(state => ({ numCorrect: state.numCorrect + 1 }))
+  }
+
+  incrementIncorrect = (): void => {
+    this.setState(state => ({ numIncorrect: state.numIncorrect + 1 }))
+  }
+
   get currentContentSlide() {
     switch (this.state.quizState) {
       case QuizzardState.InProgress:
-        return <Quizzard startOver={this.startOver} finish={this.finish} />
+        return (
+          <Quizzard
+            startOver={this.startOver}
+            finish={this.finish}
+            incrementCorrect={this.incrementCorrect}
+            incrementIncorrect={this.incrementIncorrect}
+          />
+        )
       case QuizzardState.Aborted:
       case QuizzardState.Finished:
-        return <FinishScreen onStartButtonClick={this.startStudy} />
+        return (
+          <FinishScreen
+            numCorrect={this.state.numCorrect}
+            numIncorrect={this.state.numIncorrect}
+            onStartButtonClick={this.startStudy}
+          />
+        )
       case QuizzardState.NotYetStarted:
       default:
         return <StartScreen onStartButtonClick={this.startStudy} />
@@ -67,6 +100,27 @@ class KanjiGuesser extends React.Component<Props, State> {
   }
 
   render() {
+    const QuizzardToolbar: JSX.Element = (
+      <IonToolbar>
+        <IonButtons slot="start">
+          <IonButton color="medium" size="default" onClick={this.startOver}>
+            <IonIcon slot="start" icon={exit} />
+            End Quiz
+          </IonButton>
+        </IonButtons>
+        <div slot="end">
+          <IonChip color="success">
+            <IonIcon icon={thumbsUp} />
+            <IonLabel>{this.state.numCorrect}</IonLabel>
+          </IonChip>
+          <IonChip color="danger">
+            <IonIcon icon={thumbsDown} />
+            <IonLabel>{this.state.numIncorrect}</IonLabel>
+          </IonChip>
+        </div>
+      </IonToolbar>
+    )
+
     return (
       <IonPage>
         <IonHeader>
@@ -76,6 +130,7 @@ class KanjiGuesser extends React.Component<Props, State> {
             </IonButtons>
             <IonTitle>Guess the Kanji!</IonTitle>
           </IonToolbar>
+          {this.state.quizState === QuizzardState.InProgress && QuizzardToolbar}
         </IonHeader>
         <IonContent>{this.currentContentSlide}</IonContent>
       </IonPage>

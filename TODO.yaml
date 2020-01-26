@@ -1,0 +1,7 @@
+TODO:
+  - Add keyboard support for desktop users
+  - add sounds to read Japanese
+    - autoplay option?
+  - add choice to see in Romaji versus Kana
+  - fix layout of buttons with CSS Grid
+  - offer choices of Hard (12) Easy (4) Medium (8) difficulty

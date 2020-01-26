@@ -22,7 +22,6 @@ import Home from "./pages/Home"
 import KanjiGuesserPage from "./pages/KanjiGuesserPage"
 import HeaderExample from "./pages/Sample"
 import Settings from "./pages/Settings"
-import "./theme/dark.css"
 /* Theme variables */
 import "./theme/variables.scss"
 

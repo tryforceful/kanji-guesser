@@ -11,6 +11,7 @@ import {
   IonToggle,
   IonToolbar
 } from "@ionic/react"
+import { moon } from "ionicons/icons"
 import React from "react"
 import { RouteComponentProps, withRouter } from "react-router-dom"
 import { AppPage } from "../declarations"
@@ -25,7 +26,7 @@ function toggleDarkMode(e: CustomEvent) {
 
 const Menu: React.FunctionComponent<MenuProps> = ({ appPages }) => (
   <IonMenu contentId="main" type="overlay">
-    <IonHeader color="tertiary">
+    <IonHeader>
       <IonToolbar color="tertiary">
         <IonTitle>Menu</IonTitle>
       </IonToolbar>
@@ -42,7 +43,7 @@ const Menu: React.FunctionComponent<MenuProps> = ({ appPages }) => (
       </IonHeader>
       <IonList>
         <IonItem lines="full">
-          <IonIcon slot="start" name="moon"></IonIcon>
+          <IonIcon slot="start" icon={moon}></IonIcon>
           <IonLabel>Toggle Dark Theme</IonLabel>
           <IonToggle id="themeToggle" slot="end" onIonChange={e => toggleDarkMode(e)}></IonToggle>
         </IonItem>

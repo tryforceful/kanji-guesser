@@ -1,17 +1,6 @@
-import {
-  IonButton,
-  IonButtons,
-  IonChip,
-  IonCol,
-  IonFab,
-  IonFabButton,
-  IonGrid,
-  IonIcon,
-  IonLabel,
-  IonRow,
-  IonToolbar
-} from "@ionic/react"
-import { exit, play, thumbsDown, thumbsUp } from "ionicons/icons"
+import { IonCol, IonFab, IonFabButton, IonGrid, IonIcon, IonRow } from "@ionic/react"
+import { play } from "ionicons/icons"
+import _shuffle from "lodash.shuffle"
 import React from "react"
 import { KanjiCharacter, QuizData, QuizItem } from "../data/QuizData"
 import KanjiButton from "./KanjiButton"
@@ -20,37 +9,37 @@ import QuizQueryCard from "./QuizQueryCard"
 interface Props {
   startOver: () => void
   finish: () => void
+  incrementCorrect: () => void
+  incrementIncorrect: () => void
 }
 
 export type UserChoice = KanjiCharacter | null
 
 interface State {
-  numCorrect: number
-  numIncorrect: number
-
   userChoice: UserChoice
 
   quizDeck: QuizItem[]
   currentItemIdx: number
+  currentShuffledKanji: KanjiCharacter[]
 }
 
 class Quizzard extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
 
-    this.state.quizDeck = [...QuizData]
+    this.state.quizDeck = _shuffle([...QuizData])
 
-    //shuffleCurrentKanjiChoices()
+    this.state.currentShuffledKanji = _shuffle(
+      this.state.quizDeck[this.state.currentItemIdx]?.kanjiChoices || []
+    )
   }
 
   state: State = {
-    numCorrect: 0,
-    numIncorrect: 0,
-
     userChoice: null,
 
     quizDeck: [],
-    currentItemIdx: 0
+    currentItemIdx: 0,
+    currentShuffledKanji: []
   }
 
   get currentQuizItem(): QuizItem {
@@ -58,7 +47,7 @@ class Quizzard extends React.Component<Props, State> {
   }
 
   get currentKanjiChoices(): KanjiCharacter[] {
-    return this.currentQuizItem.kanjiChoices
+    return this.state.currentShuffledKanji
   }
 
   get userHasChosen(): boolean {
@@ -69,16 +58,11 @@ class Quizzard extends React.Component<Props, State> {
     return this.state.quizDeck.length <= this.state.currentItemIdx + 1
   }
 
-  shuffleCurrentKanjiChoices = (): void => {
-    this.setState(state => ({
-      quizDeck: state.quizDeck
-    }))
-  }
-
   moveToNextCard = (): void => {
     this.setState(state => ({
       userChoice: null,
-      currentItemIdx: state.currentItemIdx + 1
+      currentItemIdx: state.currentItemIdx + 1,
+      currentShuffledKanji: _shuffle(state.quizDeck[state.currentItemIdx + 1]?.kanjiChoices || [])
     }))
   }
 
@@ -86,52 +70,21 @@ class Quizzard extends React.Component<Props, State> {
     this.setState({ userChoice: choice })
 
     if (choice === this.currentQuizItem.kanjiSlug) {
-      //setNumCorrect(numCorrect + 1);
-      this.setState(state => ({ numCorrect: state.numCorrect + 1 }))
+      this.props.incrementCorrect()
     } else {
-      //setNumIncorrect(numIncorrect + 1);
-      this.setState(state => ({ numIncorrect: state.numIncorrect + 1 }))
+      this.props.incrementIncorrect()
     }
   }
 
   render() {
-    const StatusBar: JSX.Element = (
-      <IonToolbar>
-        <IonButtons slot="start">
-          <IonButton color="medium" size="default" onClick={this.props.startOver}>
-            <IonIcon slot="start" icon={exit} />
-            End Quiz
-          </IonButton>
-        </IonButtons>
-        <div slot="end">
-          <IonChip color="success">
-            <IonIcon icon={thumbsUp} />
-            <IonLabel>{this.state.numCorrect}</IonLabel>
-          </IonChip>
-          <IonChip color="danger">
-            <IonIcon icon={thumbsDown} />
-            <IonLabel>{this.state.numIncorrect}</IonLabel>
-          </IonChip>
-        </div>
-      </IonToolbar>
-    )
-
     return (
       <React.Fragment>
-        {StatusBar}
         <QuizQueryCard currentQuizItem={this.currentQuizItem} userChoice={this.state.userChoice} />
-        <IonGrid>
-          <IonRow class="ion-justify-content-around">
+        <IonGrid className="kanji-choice-grid">
+          <IonRow class="ion-justify-content-center">
             {this.currentKanjiChoices.map((kanjiOption, index) => {
               return (
-                <IonCol
-                  key={index}
-                  sizeXs="auto"
-                  sizeSm="4"
-                  sizeMd="3"
-                  sizeLg="auto"
-                  class="ion-text-center"
-                >
+                <IonCol key={index} sizeXs="auto" class="ion-text-center">
                   <KanjiButton
                     correctChoice={this.currentQuizItem.kanjiSlug}
                     thisButtonsKanji={kanjiOption}
