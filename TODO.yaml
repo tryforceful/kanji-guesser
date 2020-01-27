@@ -5,3 +5,5 @@ TODO:
   - add choice to see in Romaji versus Kana
   - fix layout of buttons with CSS Grid
   - offer choices of Hard (12) Easy (4) Medium (8) difficulty
+  - put X on the "About This App" so we can just show it once for new users
+  - warn that going to settings/menu etc mid-quiz will kill the quiz

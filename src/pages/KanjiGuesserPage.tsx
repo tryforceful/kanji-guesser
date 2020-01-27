@@ -1,22 +1,10 @@
-import {
-  IonButton,
-  IonButtons,
-  IonChip,
-  IonContent,
-  IonHeader,
-  IonIcon,
-  IonLabel,
-  IonMenuButton,
-  IonPage,
-  IonTitle,
-  IonToolbar
-} from "@ionic/react"
+import { IonButton, IonButtons, IonChip, IonContent, IonHeader, IonIcon, IonLabel, IonMenuButton, IonPage, IonTitle, IonToolbar } from "@ionic/react"
 import { exit, thumbsDown, thumbsUp } from "ionicons/icons"
 import React from "react"
 import FinishScreen from "../components/FinishScreen"
 import Quizzard from "../components/Quizzard"
 import StartScreen from "../components/StartScreen"
-import "./KanjiGuesserPage.scss"
+import "../theme/KanjiGuesserPage.scss"
 
 interface Props {}
 
@@ -109,11 +97,11 @@ class KanjiGuesser extends React.Component<Props, State> {
           </IonButton>
         </IonButtons>
         <div slot="end">
-          <IonChip color="success">
+          <IonChip className="unclickable" color="success">
             <IonIcon icon={thumbsUp} />
             <IonLabel>{this.state.numCorrect}</IonLabel>
           </IonChip>
-          <IonChip color="danger">
+          <IonChip className="unclickable" color="danger">
             <IonIcon icon={thumbsDown} />
             <IonLabel>{this.state.numIncorrect}</IonLabel>
           </IonChip>
@@ -128,7 +116,7 @@ class KanjiGuesser extends React.Component<Props, State> {
             <IonButtons slot="start">
               <IonMenuButton />
             </IonButtons>
-            <IonTitle>Guess the Kanji!</IonTitle>
+            <IonTitle>Kanji Guesser</IonTitle>
           </IonToolbar>
           {this.state.quizState === QuizzardState.InProgress && QuizzardToolbar}
         </IonHeader>

@@ -1,5 +1,7 @@
 {
   "name": "KanjiGuesser",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "react"
 }

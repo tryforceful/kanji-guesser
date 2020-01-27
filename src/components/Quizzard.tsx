@@ -3,6 +3,7 @@ import { play } from "ionicons/icons"
 import _shuffle from "lodash.shuffle"
 import React from "react"
 import { KanjiCharacter, QuizData, QuizItem } from "../data/QuizData"
+import { SettingsContext } from "../state/SettingsContext"
 import KanjiButton from "./KanjiButton"
 import QuizQueryCard from "./QuizQueryCard"
 
@@ -21,17 +22,38 @@ interface State {
   quizDeck: QuizItem[]
   currentItemIdx: number
   currentShuffledKanji: KanjiCharacter[]
+  numButtonsToShow: number
 }
 
 class Quizzard extends React.Component<Props, State> {
+  //declare context: SettingsObj
+  static contextType = SettingsContext
+
   constructor(props: Props) {
     super(props)
 
     this.state.quizDeck = _shuffle([...QuizData])
+  }
 
-    this.state.currentShuffledKanji = _shuffle(
+  componentDidMount() {
+    //called after constructor
+
+    const firstKanjiChoices: KanjiCharacter[] =
       this.state.quizDeck[this.state.currentItemIdx]?.kanjiChoices || []
-    )
+
+    const [settings] = this.context
+
+    this.setState({
+      numButtonsToShow: this.context.quizDifficulty,
+      currentShuffledKanji: _shuffle(firstKanjiChoices.slice(0, settings.quizDifficulty))
+    })
+  }
+
+  componentDidUpdate() {
+    const [settings] = this.context
+
+    if (settings.quizDifficulty !== this.state.numButtonsToShow)
+      this.setState({ numButtonsToShow: settings.quizDifficulty })
   }
 
   state: State = {
@@ -39,15 +61,12 @@ class Quizzard extends React.Component<Props, State> {
 
     quizDeck: [],
     currentItemIdx: 0,
-    currentShuffledKanji: []
+    currentShuffledKanji: [],
+    numButtonsToShow: 0
   }
 
   get currentQuizItem(): QuizItem {
     return this.state.quizDeck[this.state.currentItemIdx]
-  }
-
-  get currentKanjiChoices(): KanjiCharacter[] {
-    return this.state.currentShuffledKanji
   }
 
   get userHasChosen(): boolean {
@@ -59,11 +78,14 @@ class Quizzard extends React.Component<Props, State> {
   }
 
   moveToNextCard = (): void => {
-    this.setState(state => ({
-      userChoice: null,
-      currentItemIdx: state.currentItemIdx + 1,
-      currentShuffledKanji: _shuffle(state.quizDeck[state.currentItemIdx + 1]?.kanjiChoices || [])
-    }))
+    this.setState(state => {
+      const newKanjiChoices = this.state.quizDeck[this.state.currentItemIdx]?.kanjiChoices || []
+      return {
+        userChoice: null,
+        currentItemIdx: state.currentItemIdx + 1,
+        currentShuffledKanji: _shuffle(newKanjiChoices.slice(0, this.state.numButtonsToShow))
+      }
+    })
   }
 
   handleUserAnswer = (choice: KanjiCharacter): void => {
@@ -82,7 +104,7 @@ class Quizzard extends React.Component<Props, State> {
         <QuizQueryCard currentQuizItem={this.currentQuizItem} userChoice={this.state.userChoice} />
         <IonGrid className="kanji-choice-grid">
           <IonRow class="ion-justify-content-center">
-            {this.currentKanjiChoices.map((kanjiOption, index) => {
+            {this.state.currentShuffledKanji.map((kanjiOption, index) => {
               return (
                 <IonCol key={index} sizeXs="auto" class="ion-text-center">
                   <KanjiButton

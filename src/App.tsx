@@ -13,7 +13,7 @@ import "@ionic/react/css/structure.css"
 import "@ionic/react/css/text-alignment.css"
 import "@ionic/react/css/text-transformation.css"
 import "@ionic/react/css/typography.css"
-import { home, list, school } from "ionicons/icons"
+import { build, school } from "ionicons/icons"
 import React from "react"
 import { Redirect, Route } from "react-router-dom"
 import Menu from "./components/Menu"
@@ -22,30 +22,31 @@ import Home from "./pages/Home"
 import KanjiGuesserPage from "./pages/KanjiGuesserPage"
 import HeaderExample from "./pages/Sample"
 import Settings from "./pages/Settings"
+import { SettingsProvider } from "./state/SettingsContext"
 /* Theme variables */
 import "./theme/variables.scss"
 
 const appPages: AppPage[] = [
   {
-    title: "Guess Kanji",
+    title: "Kanji Quiz",
     url: "/kanji-guess",
     icon: school
   },
   {
     title: "Settings",
     url: "/settings",
-    icon: list
-  },
-  {
-    title: "Home Demo Page",
-    url: "/home",
-    icon: home
-  },
-  {
-    title: "Sample",
-    url: "/sample",
-    icon: home
+    icon: build
   }
+  // {
+  //   title: "Home Demo Page",
+  //   url: "/home",
+  //   icon: home
+  // },
+  // {
+  //   title: "Sample",
+  //   url: "/sample",
+  //   icon: home
+  // }
 ]
 
 const App: React.FC = () => (
@@ -53,13 +54,15 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonSplitPane contentId="main">
         <Menu appPages={appPages} />
-        <IonRouterOutlet id="main">
-          <Route path="/home" component={Home} exact={true} />
-          <Route path="/settings" component={Settings} exact={true} />
-          <Route path="/kanji-guess" component={KanjiGuesserPage} exact={true} />
-          <Route path="/sample" component={HeaderExample} exact={true} />
-          <Route path="/" render={() => <Redirect to="/kanji-guess" />} exact={true} />
-        </IonRouterOutlet>
+        <SettingsProvider>
+          <IonRouterOutlet id="main">
+            <Route path="/home" component={Home} exact={true} />
+            <Route path="/settings" component={Settings} exact={true} />
+            <Route path="/kanji-guess" component={KanjiGuesserPage} exact={true} />
+            <Route path="/sample" component={HeaderExample} exact={true} />
+            <Route path="/" render={() => <Redirect to="/kanji-guess" />} exact={true} />
+          </IonRouterOutlet>
+        </SettingsProvider>
       </IonSplitPane>
     </IonReactRouter>
   </IonApp>
