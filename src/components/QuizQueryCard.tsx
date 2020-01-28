@@ -1,7 +1,8 @@
 import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from "@ionic/react"
 import classNames from "classnames"
 import React from "react"
-import { JapaneseQueryStringArray, KanjiPlaceholder, QuizItem } from "../data/QuizData"
+import { isSegmentPlaceholder, JapaneseQueryStringArray, QuizItem } from "../data/QuizData"
+import { KanaDisplay, useSettings } from "../state/SettingsContext"
 import TextPlaceholder from "./TextPlaceholder"
 
 interface Props {
@@ -9,70 +10,67 @@ interface Props {
   userChoice: string | null
 }
 
-function isKanjiPlaceholder(x: string | KanjiPlaceholder): x is KanjiPlaceholder {
-  return typeof x == "object" && (x as KanjiPlaceholder).kana !== undefined
-}
-
 const QuizQueryCard: React.FC<Props> = ({ currentQuizItem, userChoice }) => {
+  const [settings] = useSettings()
+
   const success: boolean = userChoice !== null && currentQuizItem.kanjiSlug === userChoice
   const failure: boolean = userChoice !== null && currentQuizItem.kanjiSlug !== userChoice
 
   const japaneseQueryArr: JapaneseQueryStringArray = currentQuizItem.japaneseQuery
-  const furiganaArr: JapaneseQueryStringArray | undefined = currentQuizItem.furigana
+
+  const HighlightedSegment: React.FC<{}> = props => (
+    <span
+      {...props}
+      className={classNames([
+        "highlighted_section",
+        {
+          success: success,
+          failure: failure
+        }
+      ])}
+    />
+  )
 
   return (
-    <IonCard className="quiz-query-card">
-      <IonCardHeader>
-        <IonCardTitle class="ion-text-center">
-          <span className="main_word">
-            {japaneseQueryArr.map((item, idx) =>
-              !isKanjiPlaceholder(item) ? (
-                item
-              ) : (
-                <span
-                  key={idx}
-                  className={classNames([
-                    "furigana_section",
-                    {
-                      success: success,
-                      failure: failure
-                    }
-                  ])}
-                >
-                  {!userChoice ? <TextPlaceholder /> : currentQuizItem.kanjiSlug}
-                </span>
-              )
-            )}
-          </span>
-        </IonCardTitle>
-        <IonCardSubtitle class="ion-text-center">
-          <span className="japanese_reading">
-            {(furiganaArr || japaneseQueryArr).map((item, idx) =>
-              !isKanjiPlaceholder(item) ? (
-                item
-              ) : (
-                <span
-                  key={idx}
-                  className={classNames([
-                    "furigana_section",
-                    {
-                      success: success,
-                      failure: failure
-                    }
-                  ])}
-                >
-                  {item.kana}
-                </span>
-              )
-            )}
-          </span>
-        </IonCardSubtitle>
-      </IonCardHeader>
+    <div slot="fixed">
+      <IonCard className="quiz-query-card">
+        <IonCardHeader>
+          <IonCardTitle class="ion-text-center">
+            <span className="main_word">
+              {japaneseQueryArr.map((segment, idx) =>
+                !isSegmentPlaceholder(segment) ? (
+                  segment.token
+                ) : (
+                  <HighlightedSegment key={idx}>
+                    {!userChoice ? <TextPlaceholder /> : currentQuizItem.kanjiSlug}
+                  </HighlightedSegment>
+                )
+              )}
+            </span>
+          </IonCardTitle>
+          <IonCardSubtitle class="ion-text-center">
+            <span className="japanese_reading">
+              {japaneseQueryArr.map((segment, idx) =>
+                !isSegmentPlaceholder(segment) ? (
+                  (settings.kanaDisplayChoice === KanaDisplay.Romaji && segment.romaji) ||
+                  segment.furigana ||
+                  segment.token
+                ) : (
+                  <HighlightedSegment key={idx}>
+                    {(settings.kanaDisplayChoice === KanaDisplay.Romaji && segment.romaji) ||
+                      segment.furigana}
+                  </HighlightedSegment>
+                )
+              )}
+            </span>
+          </IonCardSubtitle>
+        </IonCardHeader>
 
-      <IonCardContent class="english-translation ion-text-center">
-        {currentQuizItem.englishMeaning}
-      </IonCardContent>
-    </IonCard>
+        <IonCardContent class="english-translation ion-text-center">
+          {currentQuizItem.meaning}
+        </IonCardContent>
+      </IonCard>
+    </div>
   )
 }
 

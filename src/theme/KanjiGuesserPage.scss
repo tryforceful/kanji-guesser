@@ -1,3 +1,5 @@
+@import "variables.scss";
+
 .kanji-choice {
   /* min-width: 25vw;
   max-width: 30vw; */
@@ -16,7 +18,7 @@
   font-size: 20px;
 }
 
-.furigana_section {
+.highlighted_section {
   color: var(--ion-color-primary);
 }
 
@@ -44,12 +46,65 @@
   }
 }
 
+.quizzard {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 .kanji-choice-grid {
-  @media (min-width: 768px) {
-    max-width: 768px;
+  max-width: 768px;
+  margin: 5px;
+  .choices-container {
+    display: grid;
+    grid-gap: 10px 10px;
+
+    &.buttons-hard {
+      grid-template-columns: repeat(3, minmax(90px, 120px));
+      @media only screen and (min-width: 400px) {
+        grid-template-columns: repeat(4, minmax(90px, 120px));
+      }
+    }
+    &.buttons-medium,
+    &.buttons-easy {
+      grid-template-columns: repeat(2, minmax(90px, 120px));
+      @media only screen and (min-width: 400px) {
+        grid-template-columns: repeat(4, minmax(90px, 120px));
+      }
+    }
+
+    .button-container {
+      --padding-start: auto;
+      --padding-end: auto;
+      width: 100%;
+      padding-bottom: 100%;
+      position: relative;
+      .kanji-choice {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        margin: 0;
+        // &::before {
+        //   content: "";
+        //   padding-bottom: 100%;
+        //   width: 1px;
+        //   margin-left: -1px;
+        //   float: left;
+        //   height: 0;
+        // }
+        // &::after {
+        //   content: "";
+        //   display: table;
+        //   clear: both;
+        // }
+      }
+    }
   }
 }
 
 .unclickable {
   cursor: auto;
+  pointer-events: none;
 }

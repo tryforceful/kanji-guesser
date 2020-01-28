@@ -1,0 +1,27 @@
+@import "theme.css";
+@import "theme-dark.css";
+
+body:not(.dark) {
+  ion-content {
+    --ion-background-color: #eefeff;
+  }
+  ion-card {
+    --background: white;
+  }
+}
+
+ion-card ion-card-content ul {
+  font-size: 20px;
+}
+
+.slide-menu-header {
+  background-color: var(--ion-color-tertiary);
+}
+
+// iOS Styles
+
+.ios {
+  ion-card-header ~ ion-card-content {
+    padding-top: 0;
+  }
+}

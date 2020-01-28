@@ -7,3 +7,11 @@ TODO:
   - offer choices of Hard (12) Easy (4) Medium (8) difficulty
   - put X on the "About This App" so we can just show it once for new users
   - warn that going to settings/menu etc mid-quiz will kill the quiz
+
+Data Checks (jest?):
+  - KanjiSlug is not in list of Distractors
+  - Distractors are all unique
+  - List of Distractors is at least 11 long
+  - Kanji Slug is just one letter long (?)
+  - Distractors are each just one letter long (?)
+  - There are proper romaji, furigana glosses for everything

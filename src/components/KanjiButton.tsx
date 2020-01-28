@@ -2,6 +2,7 @@ import { IonButton } from "@ionic/react"
 import classNames from "classnames"
 import React from "react"
 import { KanjiCharacter } from "../data/QuizData"
+import { useSettings } from "../state/SettingsContext"
 import { UserChoice } from "./Quizzard"
 
 interface Props {
@@ -17,6 +18,8 @@ const KanjiButton: React.FC<Props> = ({
   userChoice,
   onClick: emitButtonPress
 }) => {
+  const [settings] = useSettings()
+
   return (
     <IonButton
       className={classNames([
@@ -26,11 +29,10 @@ const KanjiButton: React.FC<Props> = ({
         }
       ])}
       strong={false}
-      fill="solid"
+      fill={settings.darkThemeOn ? "outline" : "solid"}
       // {!userChoice ? "outline" : "solid"}
       disabled={!!userChoice}
       color={!userChoice ? "primary" : thisButtonsKanji === correctChoice ? "success" : "danger"}
-      size="large"
       onClick={() => emitButtonPress(thisButtonsKanji)}
     >
       {thisButtonsKanji}

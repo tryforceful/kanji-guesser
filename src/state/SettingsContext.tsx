@@ -25,7 +25,7 @@ export const initialSettings: SettingsObj = {
   quizDifficulty: QuizDifficulty.Hard
 }
 
-type SettingsContext = [SettingsObj, React.Dispatch<React.SetStateAction<SettingsObj>>]
+export type SettingsContext = [SettingsObj, React.Dispatch<React.SetStateAction<SettingsObj>>]
 
 export const SettingsContext: React.Context<SettingsContext> = React.createContext(
   // This one will not be used unless the context is refrenced while providerless
@@ -33,7 +33,7 @@ export const SettingsContext: React.Context<SettingsContext> = React.createConte
   (undefined as unknown) as SettingsContext
 )
 
-function useSettings() {
+function useSettings(): SettingsContext {
   const context = React.useContext(SettingsContext)
   if (!context) throw new Error("useSettings must be used within a SettingsContext.Provider")
   return context

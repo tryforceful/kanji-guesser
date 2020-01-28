@@ -1,13 +1,4 @@
-import {
-  IonButton,
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardTitle,
-  IonItem,
-  IonLabel,
-  IonList
-} from "@ionic/react"
+import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardTitle } from "@ionic/react"
 import React from "react"
 
 interface Props {
@@ -28,29 +19,38 @@ const FinishScreen: React.FC<Props> = ({ numCorrect, numIncorrect, onStartButton
         </IonCardHeader>
 
         <IonCardContent>
-          <IonList inset={true} lines="inset">
-            <IonItem color="success">
+          {/* <IonList inset={true} lines="inset">
+            <IonItem color="medium">
               <IonLabel>
-                <strong>{numCorrect} Correct</strong>
+                <strong>Correct</strong>
+              </IonLabel>
+              <IonLabel color="success" slot="end">
+                {numCorrect}
               </IonLabel>
             </IonItem>
-            <IonItem color="danger">
+            <IonItem color="medium">
               <IonLabel>
-                <strong>{numIncorrect} Incorrect</strong>
+                <strong>Incorrect</strong>
+              </IonLabel>
+              <IonLabel color="success" slot="end">
+                {numIncorrect}
               </IonLabel>
             </IonItem>
-          </IonList>
+          </IonList> */}
 
-          {/* <ul className="ion-no-margin">
+          <ul className="ion-no-margin">
             <li className="success">
               <strong>{numCorrect} Correct</strong>
             </li>
             <li className="failure">
               <strong>{numIncorrect} Incorrect</strong>
             </li>
-          </ul> */}
-          <IonCardTitle color="dark" className="ion-padding-top">
-            {percentCorrect}% correct! {percentCorrect <= 50 ? "頑張れ!" : "よく出来ました!"}
+          </ul>
+          <IonCardTitle color="dark" className="ion-text-center ion-padding-top">
+            {percentCorrect}% correct{percentCorrect > 50 && "!"}
+          </IonCardTitle>
+          <IonCardTitle color="dark" className="ion-text-center ion-padding-top">
+            {percentCorrect <= 50 ? "頑張れ!" : "よく出来ました!"}
           </IonCardTitle>
         </IonCardContent>
       </IonCard>

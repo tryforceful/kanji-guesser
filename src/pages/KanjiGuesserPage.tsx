@@ -1,9 +1,22 @@
-import { IonButton, IonButtons, IonChip, IonContent, IonHeader, IonIcon, IonLabel, IonMenuButton, IonPage, IonTitle, IonToolbar } from "@ionic/react"
-import { exit, thumbsDown, thumbsUp } from "ionicons/icons"
+import {
+  IonButton,
+  IonButtons,
+  IonChip,
+  IonContent,
+  IonHeader,
+  IonIcon,
+  IonLabel,
+  IonMenuButton,
+  IonPage,
+  IonTitle,
+  IonToolbar
+} from "@ionic/react"
+import { exit, thumbsDown, thumbsUp, timer } from "ionicons/icons"
 import React from "react"
 import FinishScreen from "../components/FinishScreen"
 import Quizzard from "../components/Quizzard"
 import StartScreen from "../components/StartScreen"
+import { QuizData } from "../data/QuizData"
 import "../theme/KanjiGuesserPage.scss"
 
 interface Props {}
@@ -33,6 +46,7 @@ class KanjiGuesser extends React.Component<Props, State> {
     numIncorrect: 0
   }
 
+  // TODO: maybe this should be a reducer for the QuizzardState
   startStudy = (): void => {
     this.setState({
       quizState: QuizzardState.InProgress,
@@ -53,6 +67,7 @@ class KanjiGuesser extends React.Component<Props, State> {
     })
   }
 
+  // TODO: and this should be a reducer for the counts
   incrementCorrect = (): void => {
     this.setState(state => ({ numCorrect: state.numCorrect + 1 }))
   }
@@ -97,11 +112,16 @@ class KanjiGuesser extends React.Component<Props, State> {
           </IonButton>
         </IonButtons>
         <div slot="end">
-          <IonChip className="unclickable" color="success">
+          <IonChip mode="ios" className="unclickable" color="primary">
+            <IonIcon icon={timer} />
+            {/* TODO: fix me pulling from QuizData directly  */}
+            <IonLabel>{QuizData.length - this.state.numCorrect - this.state.numIncorrect}</IonLabel>
+          </IonChip>
+          <IonChip mode="ios" className="unclickable" color="success">
             <IonIcon icon={thumbsUp} />
             <IonLabel>{this.state.numCorrect}</IonLabel>
           </IonChip>
-          <IonChip className="unclickable" color="danger">
+          <IonChip mode="ios" className="unclickable" color="danger">
             <IonIcon icon={thumbsDown} />
             <IonLabel>{this.state.numIncorrect}</IonLabel>
           </IonChip>

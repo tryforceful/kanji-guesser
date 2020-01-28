@@ -24,7 +24,7 @@ import HeaderExample from "./pages/Sample"
 import Settings from "./pages/Settings"
 import { SettingsProvider } from "./state/SettingsContext"
 /* Theme variables */
-import "./theme/variables.scss"
+import "./theme/main.scss"
 
 const appPages: AppPage[] = [
   {

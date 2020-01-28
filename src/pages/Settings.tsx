@@ -81,13 +81,13 @@ const ListItems: React.FC<{}> = () => {
   }
 
   function quizDifficultyToggled(e: CustomEvent): void {
-    console.log(e.detail.value)
+    //console.log(e.detail.value)
 
     setSettings(prevState => ({ ...prevState, quizDifficulty: e.detail.value })) //turn this into a reducer!!!
   }
 
   function kanaDisplayToggled(e: CustomEvent): void {
-    console.log(e.detail.value)
+    //console.log(e.detail.value)
 
     setSettings(prevState => {
       return { ...prevState, kanaDisplayChoice: e.detail.value }
@@ -115,21 +115,27 @@ const ListItems: React.FC<{}> = () => {
           <IonRadio color="tertiary" slot="start" value={QuizDifficulty.Easy} />
           <IonIcon slot="start" icon={starOutline}></IonIcon>
           <IonLabel>Easy</IonLabel>
-          <IonNote slot="end">{QuizDifficulty.Easy} choices</IonNote>
+          <IonNote mode="ios" slot="end">
+            {QuizDifficulty.Easy} choices
+          </IonNote>
         </IonItem>
 
         <IonItem lines="none">
           <IonRadio color="tertiary" slot="start" value={QuizDifficulty.Medium} />
           <IonIcon slot="start" icon={starHalf}></IonIcon>
           <IonLabel>Medium</IonLabel>
-          <IonNote slot="end">{QuizDifficulty.Medium} choices</IonNote>
+          <IonNote mode="ios" slot="end">
+            {QuizDifficulty.Medium} choices
+          </IonNote>
         </IonItem>
 
         <IonItem lines="none">
           <IonRadio color="tertiary" slot="start" value={QuizDifficulty.Hard} />
           <IonIcon slot="start" icon={star}></IonIcon>
           <IonLabel>Hard</IonLabel>
-          <IonNote slot="end">{QuizDifficulty.Hard} choices</IonNote>
+          <IonNote mode="ios" slot="end">
+            {QuizDifficulty.Hard} choices
+          </IonNote>
         </IonItem>
       </IonRadioGroup>
 
