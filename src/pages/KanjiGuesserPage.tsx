@@ -35,29 +35,32 @@ interface State {
   numIncorrect: number
 }
 
+const initialState = Object.freeze({
+  quizState: QuizzardState.NotYetStarted,
+  numCorrect: 0,
+  numIncorrect: 0
+})
+
 class KanjiGuesser extends React.Component<Props, State> {
   // static defaultProps: Props = {
   //   count: 10
   // }
 
-  state: State = {
-    quizState: QuizzardState.NotYetStarted,
-    numCorrect: 0,
-    numIncorrect: 0
-  }
+  state: State = { ...initialState }
 
   // TODO: maybe this should be a reducer for the QuizzardState
   startStudy = (): void => {
     this.setState({
-      quizState: QuizzardState.InProgress,
-      numCorrect: 0,
-      numIncorrect: 0
+      quizState: QuizzardState.InProgress
+      // numCorrect: 0,
+      // numIncorrect: 0
     })
   }
 
   startOver = (): void => {
+    //reset state to beginning
     this.setState({
-      quizState: QuizzardState.Aborted
+      ...initialState
     })
   }
 
@@ -67,7 +70,7 @@ class KanjiGuesser extends React.Component<Props, State> {
     })
   }
 
-  // TODO: and this should be a reducer for the counts
+  // TODO: and this should be a reducer for the counts, w new count for total to study
   incrementCorrect = (): void => {
     this.setState(state => ({ numCorrect: state.numCorrect + 1 }))
   }
@@ -81,7 +84,6 @@ class KanjiGuesser extends React.Component<Props, State> {
       case QuizzardState.InProgress:
         return (
           <Quizzard
-            startOver={this.startOver}
             finish={this.finish}
             incrementCorrect={this.incrementCorrect}
             incrementIncorrect={this.incrementIncorrect}
@@ -93,7 +95,7 @@ class KanjiGuesser extends React.Component<Props, State> {
           <FinishScreen
             numCorrect={this.state.numCorrect}
             numIncorrect={this.state.numIncorrect}
-            onStartButtonClick={this.startStudy}
+            onStartButtonClick={this.startOver}
           />
         )
       case QuizzardState.NotYetStarted:

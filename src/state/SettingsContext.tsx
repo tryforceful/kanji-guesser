@@ -22,7 +22,7 @@ export interface SettingsObj {
 export const initialSettings: SettingsObj = {
   darkThemeOn: false,
   kanaDisplayChoice: KanaDisplay.Kana,
-  quizDifficulty: QuizDifficulty.Hard
+  quizDifficulty: QuizDifficulty.Medium
 }
 
 export type SettingsContext = [SettingsObj, React.Dispatch<React.SetStateAction<SettingsObj>>]

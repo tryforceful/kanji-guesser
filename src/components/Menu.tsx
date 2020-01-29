@@ -22,14 +22,14 @@ const Menu: React.FunctionComponent<MenuProps> = ({ appPages }) => (
   <IonMenu contentId="main" type="push">
     <IonHeader className="slide-menu-header">
       <IonToolbar color="tertiary">
-        <IonTitle>Kanji Guesser</IonTitle>
+        <IonTitle>Menu</IonTitle>
       </IonToolbar>
     </IonHeader>
     <IonContent>
       <IonHeader collapse="condense">
         {/* somehow this is only used in ios I think? */}
         <IonToolbar color="tertiary">
-          <IonTitle size="large">Kanji Guesser</IonTitle>
+          <IonTitle size="large">Menu</IonTitle>
         </IonToolbar>
         {/* <IonToolbar>
           <IonSearchbar></IonSearchbar>

@@ -21,6 +21,7 @@ import {
 import { moon, star, starHalf, starOutline } from "ionicons/icons"
 import React from "react"
 import { KanaDisplay, QuizDifficulty, useSettings } from "../state/SettingsContext"
+import "../theme/SettingsPage.scss"
 
 const ListPage: React.FC = () => {
   return (
@@ -129,7 +130,7 @@ const ListItems: React.FC<{}> = () => {
           </IonNote>
         </IonItem>
 
-        <IonItem lines="none">
+        <IonItem lines="full">
           <IonRadio color="tertiary" slot="start" value={QuizDifficulty.Hard} />
           <IonIcon slot="start" icon={star}></IonIcon>
           <IonLabel>Hard</IonLabel>
@@ -143,7 +144,12 @@ const ListItems: React.FC<{}> = () => {
         <IonLabel>Display Preferences</IonLabel>
       </IonListHeader>
 
-      <IonSegment value={settings.kanaDisplayChoice} onIonChange={kanaDisplayToggled}>
+      <IonSegment
+        class="display-pref-segment"
+        color="tertiary"
+        value={settings.kanaDisplayChoice}
+        onIonChange={kanaDisplayToggled}
+      >
         <IonSegmentButton value={KanaDisplay.Kana}>
           <IonLabel>{KanaDisplay.Kana}</IonLabel>
         </IonSegmentButton>

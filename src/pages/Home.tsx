@@ -20,7 +20,6 @@ import {
 } from "@ionic/react"
 import { book, build, colorFill, grid, pin, walk, warning, wifi, wine } from "ionicons/icons"
 import React from "react"
-import "./Home.css"
 
 const HomePage: React.FC = () => {
   return (

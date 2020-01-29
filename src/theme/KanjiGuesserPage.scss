@@ -1,5 +1,11 @@
 @import "variables.scss";
 
+.start-button {
+  &.md {
+    margin: 10px;
+  }
+}
+
 .kanji-choice {
   /* min-width: 25vw;
   max-width: 30vw; */
@@ -52,7 +58,7 @@
   height: 100%;
 }
 .kanji-choice-grid {
-  max-width: 768px;
+  //max-width: 768px;
   margin: 5px;
   .choices-container {
     display: grid;

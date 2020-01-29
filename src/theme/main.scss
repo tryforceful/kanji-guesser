@@ -25,3 +25,35 @@ ion-card ion-card-content ul {
     padding-top: 0;
   }
 }
+
+.welcome-card {
+  max-width: 300px;
+  margin: 10px auto;
+  border-radius: 50px;
+
+  @at-root body:not(.dark) #{selector_unify(ion-card, &)} {
+    --background: rgba(56, 127, 255, 0.2);
+  }
+
+  img {
+    max-height: 200px;
+    height: 33vh;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  ion-card-header {
+    --background: rgba(56, 127, 255, 0);
+  }
+
+  ion-card-title {
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
+
+  // &::before,
+  // &::after {
+  //   content: "?";
+  // }
+}

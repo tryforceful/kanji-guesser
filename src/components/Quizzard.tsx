@@ -9,7 +9,6 @@ import KanjiButton from "./KanjiButton"
 import QuizQueryCard from "./QuizQueryCard"
 
 interface Props {
-  startOver: () => void
   finish: () => void
   incrementCorrect: () => void
   incrementIncorrect: () => void
@@ -26,6 +25,23 @@ interface State {
   numButtonsToShow: number
 }
 
+type KanjiButtonKey = "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "0" | "-" | "="
+
+const kanjiButtonKeys: KanjiButtonKey[] = [
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "0",
+  "-",
+  "="
+]
+
 class Quizzard extends React.Component<Props, State> {
   //declare context: SettingsContext //TODO: understand what declare really does
   static contextType = SettingsContext
@@ -39,6 +55,7 @@ class Quizzard extends React.Component<Props, State> {
 
   componentDidMount() {
     //called after constructor
+    this.setupKeypressObserver()
 
     let firstKanjiChoices: KanjiCharacter[] = this.currentQuizItem.distractors || []
 
@@ -62,6 +79,10 @@ class Quizzard extends React.Component<Props, State> {
       this.setState({ numButtonsToShow: settings.quizDifficulty })
   }
 
+  componentWillUnmount() {
+    this.removeKeypressObserver()
+  }
+
   state: State = {
     userChoice: null,
 
@@ -69,6 +90,37 @@ class Quizzard extends React.Component<Props, State> {
     currentItemIdx: 0,
     currentShuffledKanji: [],
     numButtonsToShow: 0
+  }
+
+  setupKeypressObserver = (): void => {
+    document.addEventListener("keyup", this.handleKeypress)
+  }
+
+  removeKeypressObserver = (): void => {
+    document.removeEventListener("keyup", this.handleKeypress)
+  }
+
+  handleKeypress = (event: KeyboardEvent) => {
+    if (event.defaultPrevented) {
+      return
+    }
+
+    //TODO: Make sure we only do this on Desktop!
+
+    const key = String(event.key || event.keyCode)
+
+    if (!this.userHasChosen) {
+      if ((kanjiButtonKeys as string[]).includes(key)) {
+        const idx = (kanjiButtonKeys as string[]).indexOf(key)
+        if (this.state.currentShuffledKanji.length > idx) {
+          this.handleUserAnswer(this.state.currentShuffledKanji[idx])
+        }
+      }
+    } else {
+      if ([" ", "Enter", "ArrowRight"].includes(key)) {
+        this.moveToNextCard()
+      }
+    }
   }
 
   get currentQuizItem(): QuizItem {
@@ -84,6 +136,10 @@ class Quizzard extends React.Component<Props, State> {
   }
 
   moveToNextCard = (): void => {
+    if (this.isFinalCard) {
+      this.props.finish()
+      return
+    }
     this.setState(state => {
       const nextQuizItem = this.state.quizDeck[this.state.currentItemIdx + 1]
       let newKanjiChoices = nextQuizItem?.distractors || []
@@ -152,7 +208,7 @@ class Quizzard extends React.Component<Props, State> {
         </IonGrid>
         {this.userHasChosen && (
           <IonFab vertical="bottom" horizontal="end" slot="fixed">
-            <IonFabButton onClick={!this.isFinalCard ? this.moveToNextCard : this.props.finish}>
+            <IonFabButton onClick={this.moveToNextCard}>
               <IonIcon icon={play}></IonIcon>
             </IonFabButton>
           </IonFab>

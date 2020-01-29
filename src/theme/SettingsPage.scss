@@ -1,0 +1,14 @@
+.display-pref-segment {
+  max-width: 300px;
+  margin: auto;
+  ion-segment-button ion-label {
+    &.ios {
+      font-size: 17px;
+      padding: 10% 0;
+    }
+    &.md {
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+  }
+}

@@ -9,6 +9,15 @@ interface Props {
 const StartScreen: React.FC<Props> = ({ onStartButtonClick }) => {
   return (
     <React.Fragment>
+      <IonCard className="welcome-card">
+        <IonCardHeader>
+          <IonCardTitle color="dark" class="ion-text-center">
+            Kanji Guesser
+          </IonCardTitle>
+        </IonCardHeader>
+        <img src="/assets/gothic_guess_kanji.svg" alt="" />
+      </IonCard>
+
       <IonCard>
         <IonCardHeader>
           {/* <IonCardSubtitle>Card Subtitle</IonCardSubtitle> */}
@@ -23,7 +32,7 @@ const StartScreen: React.FC<Props> = ({ onStartButtonClick }) => {
       </IonCard>
       <IonButton
         strong={true}
-        className="ion-margin"
+        className="ion-margin start-button"
         fill="solid"
         size="large"
         expand="block"
