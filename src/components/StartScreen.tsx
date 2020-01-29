@@ -47,9 +47,21 @@ const StartScreen: React.FC<Props> = ({ onStartButtonClick }) => {
         </IonCardHeader>
 
         <IonCardContent>
-          Japanese vocabulary words will be shown to you with a kanji character missing from the
-          word. You must choose the correct kanji from the available options. This will improve your
-          kanji recognition skills and help you discern between similar-looking kanji.
+          This app is a Japanese language learning tool designed to improve your kanji recognition
+          skills and help you discern between similar-looking kanji. (<strong>Kanji</strong> (漢字)
+          are Japanese symbols that were borrowed from the Chinese writing system.)
+          <br />
+          <br />
+          <span>
+            Japanese vocabulary words will be shown to you on a series of flashcards with a kanji
+            character missing from each word. You must choose the correct kanji from the available
+            choices. A reading gloss is provided to you as a hint either in{" "}
+            <strong>furigana</strong> (Japanese kana characters, かな) or <strong>romaji</strong>{" "}
+            (English letters).
+          </span>
+          <br />
+          <br />
+          Good luck! 頑張れ！
         </IonCardContent>
       </IonCard>
     </React.Fragment>
