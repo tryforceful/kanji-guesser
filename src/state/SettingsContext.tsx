@@ -3,7 +3,7 @@
 import React, { useState } from "react"
 
 export enum KanaDisplay {
-  Kana = "Kana",
+  Kana = "かな",
   Romaji = "Romaji"
 }
 

@@ -1,4 +1,4 @@
-import { IonFab, IonFabButton, IonGrid, IonIcon, IonRow } from "@ionic/react"
+import { IonFab, IonFabButton, IonGrid, IonIcon, IonRow, isPlatform } from "@ionic/react"
 import classNames from "classnames"
 import { play } from "ionicons/icons"
 import _shuffle from "lodash.shuffle"
@@ -55,7 +55,7 @@ class Quizzard extends React.Component<Props, State> {
 
   componentDidMount() {
     //called after constructor
-    this.setupKeypressObserver()
+    if (!isPlatform("mobile")) this.setupKeypressObserver()
 
     let firstKanjiChoices: KanjiCharacter[] = this.currentQuizItem.distractors || []
 
@@ -80,7 +80,7 @@ class Quizzard extends React.Component<Props, State> {
   }
 
   componentWillUnmount() {
-    this.removeKeypressObserver()
+    if (!isPlatform("mobile")) this.removeKeypressObserver()
   }
 
   state: State = {
@@ -108,6 +108,7 @@ class Quizzard extends React.Component<Props, State> {
     //TODO: Make sure we only do this on Desktop!
 
     const key = String(event.key || event.keyCode)
+    console.log(key)
 
     if (!this.userHasChosen) {
       if ((kanjiButtonKeys as string[]).includes(key)) {
@@ -192,6 +193,7 @@ class Quizzard extends React.Component<Props, State> {
                     thisButtonsKanji={kanjiOption}
                     userChoice={this.state.userChoice}
                     onClick={this.handleUserAnswer}
+                    altKey={kanjiButtonKeys[index]}
                   />
                 </div>
                 // <IonCol key={index} sizeXs="auto" class="ion-text-center">
@@ -208,7 +210,7 @@ class Quizzard extends React.Component<Props, State> {
         </IonGrid>
         {this.userHasChosen && (
           <IonFab vertical="bottom" horizontal="end" slot="fixed">
-            <IonFabButton onClick={this.moveToNextCard}>
+            <IonFabButton class="next-button" onClick={this.moveToNextCard}>
               <IonIcon icon={play}></IonIcon>
             </IonFabButton>
           </IonFab>

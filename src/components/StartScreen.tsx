@@ -55,9 +55,8 @@ const StartScreen: React.FC<Props> = ({ onStartButtonClick }) => {
           <span>
             Japanese vocabulary words will be shown to you on a series of flashcards with a kanji
             character missing from each word. You must choose the correct kanji from the available
-            choices. A reading gloss is provided to you as a hint either in{" "}
-            <strong>furigana</strong> (Japanese kana characters, かな) or <strong>romaji</strong>{" "}
-            (English letters).
+            choices. A reading gloss is provided to you as a hint either in <strong>kana</strong>{" "}
+            (Japanese characters, かな) or <strong>romaji</strong> (English letters).
           </span>
           <br />
           <br />
