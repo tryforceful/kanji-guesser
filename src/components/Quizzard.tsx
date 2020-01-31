@@ -53,6 +53,7 @@ class Quizzard extends React.Component<Props, State> {
     this.state.quizDeck = _shuffle([...QuizData])
   }
 
+  //TODO: use ionViewWillEnter?
   componentDidMount() {
     //called after constructor
     if (!isPlatform("mobile")) this.setupKeypressObserver()
@@ -72,6 +73,7 @@ class Quizzard extends React.Component<Props, State> {
     })
   }
 
+  //TODO: use ionViewWillLeave?
   componentDidUpdate() {
     const [settings] = this.context
 
