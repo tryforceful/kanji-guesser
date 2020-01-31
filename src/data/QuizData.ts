@@ -40,7 +40,7 @@ export const QuizData: QuizItem[] = [
       { token: null, furigana: "しん", romaji: "shin" },
       { token: "じる", romaji: "jiru" }
     ],
-    meaning: "To believe, to trust",
+    meaning: "to believe, to trust",
     distractors: [
       "計",
       "訂",
@@ -69,7 +69,7 @@ export const QuizData: QuizItem[] = [
       { token: null, furigana: "い", romaji: "i" },
       { token: "う", romaji: "u" }
     ],
-    meaning: "To say, to speak",
+    meaning: "to say, to speak",
     distractors: [
       "計",
       "訂",
@@ -99,7 +99,7 @@ export const QuizData: QuizItem[] = [
       { token: null, furigana: "あ", romaji: "a" },
       { token: "がる", romaji: "garu" }
     ],
-    meaning: "To eat (humble)",
+    meaning: "to eat (honorific)",
     distractors: [
       "五",
       "止",

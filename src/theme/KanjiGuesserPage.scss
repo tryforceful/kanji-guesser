@@ -1,5 +1,31 @@
 @import "variables.scss";
 
+.kanji-guesser-page {
+  ion-content {
+    &::before {
+      content: "";
+      background: var(--ion-color-background);
+      width: 100vw;
+      height: 8px;
+      top: 0;
+      left: 0;
+      position: absolute;
+      z-index: 10;
+    }
+    @at-root body.dark &.ios::before {
+      background: black;
+    }
+    @at-root body.dark &.md::before {
+      background: #121212;
+    }
+  }
+  ion-content > div > div[slot="fixed"] {
+    position: sticky;
+    top: 8px;
+    z-index: 10;
+  }
+}
+
 .start-button {
   &.md {
     margin: 10px;
@@ -53,6 +79,9 @@
 .quiz-query-card {
   &.ios {
     margin: 8px;
+    ion-card-subtitle.ios {
+      text-transform: unset;
+    }
   }
 }
 

@@ -132,7 +132,7 @@ class KanjiGuesser extends React.Component<Props, State> {
     )
 
     return (
-      <IonPage>
+      <IonPage className="ion-page kanji-guesser-page">
         <IonHeader>
           <IonToolbar color="tertiary">
             <IonButtons slot="start">

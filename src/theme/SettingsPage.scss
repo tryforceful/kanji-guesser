@@ -1,4 +1,7 @@
 .display-pref-segment {
+  &.ios {
+    margin-top: 10px;
+  }
   max-width: 300px;
   margin: auto;
   ion-segment-button ion-label {
@@ -9,6 +12,22 @@
     &.md {
       margin-top: 8px;
       margin-bottom: 8px;
+    }
+  }
+}
+
+.settings-example-query-card {
+  margin: 0 10px;
+  .quiz-query-card {
+    max-width: 350px;
+    margin: auto;
+
+    ion-card-subtitle {
+      min-height: 36px;
+    }
+
+    @at-root body.dark & {
+      --background: #24272f;
     }
   }
 }

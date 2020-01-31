@@ -21,6 +21,9 @@ ion-card ion-card-content ul {
 // iOS Styles
 
 .ios {
+  ion-card-header {
+    padding-bottom: 10px;
+  }
   ion-card-header ~ ion-card-content {
     padding-top: 0;
   }

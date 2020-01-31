@@ -20,6 +20,8 @@ import {
 } from "@ionic/react"
 import { moon, star, starHalf, starOutline } from "ionicons/icons"
 import React from "react"
+import QuizQueryCard from "../components/QuizQueryCard"
+import { QuizItem } from "../data/QuizData"
 import { KanaDisplay, QuizDifficulty, useSettings } from "../state/SettingsContext"
 import "../theme/SettingsPage.scss"
 
@@ -40,6 +42,17 @@ const ListPage: React.FC = () => {
       </IonContent>
     </IonPage>
   )
+}
+
+const exampleQuizItem: QuizItem = {
+  kanjiSlug: "手",
+  japaneseQuery: [
+    { token: "お", romaji: "o" },
+    { token: null, furigana: "て", romaji: "te" },
+    { token: "本", furigana: "ほん", romaji: "hon" }
+  ],
+  meaning: "example",
+  distractors: [] //unnecessary for this card
 }
 
 const ListItems: React.FC<{}> = () => {
@@ -102,6 +115,7 @@ const ListItems: React.FC<{}> = () => {
         <IonLabel>Dark Theme</IonLabel>
         <IonToggle
           id="themeToggle"
+          color="tertiary"
           slot="end"
           checked={settings.darkThemeOn}
           onIonChange={e => toggleDarkMode(e)}
@@ -143,6 +157,10 @@ const ListItems: React.FC<{}> = () => {
       <IonListHeader>
         <IonLabel>Display Preferences</IonLabel>
       </IonListHeader>
+
+      <div className="settings-example-query-card">
+        <QuizQueryCard currentQuizItem={exampleQuizItem} userChoice={null} />
+      </div>
 
       <IonSegment
         class="display-pref-segment"

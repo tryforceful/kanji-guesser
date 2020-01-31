@@ -211,7 +211,7 @@ class Quizzard extends React.Component<Props, State> {
           </IonRow>
         </IonGrid>
         {this.userHasChosen && (
-          <IonFab vertical="bottom" horizontal="end" slot="fixed">
+          <IonFab style={{ position: "fixed" }} vertical="bottom" horizontal="end" slot="fixed">
             <IonFabButton class="next-button" onClick={this.moveToNextCard}>
               <IonIcon icon={play}></IonIcon>
             </IonFabButton>
