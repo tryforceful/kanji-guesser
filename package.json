@@ -6,7 +6,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --coverage",
+    "test": "react-scripts test --coverage --watchAll",
     "eject": "react-scripts eject",
     "": "",
     "prettier": "prettier --list-different 'src/**/*.ts' || (echo '\nPlease fix code formatting by running:\nnpm run prettier:fix\n'; exit 1)",
@@ -62,6 +62,9 @@
   "jest": {
     "snapshotSerializers": [
       "jest-serializer-html"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx,js,jsx}"
     ],
     "coverageReporters": [
       "json",

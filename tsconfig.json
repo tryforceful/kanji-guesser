@@ -16,7 +16,8 @@
     "jsx": "react",
     "emitDecoratorMetadata": false, // include only if using decorators
     "experimentalDecorators": false, // include only if using decorators
-    "sourceMap": true
+    "sourceMap": true,
+    "downlevelIteration": true
   },
   "include": ["src"]
 }

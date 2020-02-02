@@ -4,12 +4,12 @@ export type Placeholder = null
 export interface NormalWordSegment {
   token: KanjiCharacter
   furigana?: string
-  romaji?: string
+  romaji: string
 }
 export interface PlaceholderSegment {
   token: Placeholder
   furigana: string
-  romaji?: string
+  romaji: string
 }
 
 // This is a Discriminated Union ("token" is the discriminant):
@@ -20,9 +20,9 @@ export function isSegmentPlaceholder(segment: WordSegment): segment is Placehold
   return segment.token === (null as Placeholder)
 }
 
-export function isKanjiPlaceholder(k: KanjiCharacter | Placeholder): k is Placeholder {
-  return k === (null as Placeholder)
-}
+// export function isKanjiPlaceholder(k: KanjiCharacter | Placeholder): k is Placeholder {
+//   return k === (null as Placeholder)
+// }
 
 export type JapaneseQueryStringArray = Array<WordSegment>
 

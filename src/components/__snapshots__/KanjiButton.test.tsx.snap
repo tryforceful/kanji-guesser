@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Kanji Button tests button changes when user makes a choice 1`] = `
+exports[`Kanji Button tests button when user hasn't chosen yet 1`] = `
 <body>
   <div>
     <ion-button
@@ -14,7 +14,7 @@ exports[`Kanji Button tests button changes when user makes a choice 1`] = `
 </body>
 `;
 
-exports[`Kanji Button tests button changes when user makes a choice 2`] = `
+exports[`Kanji Button tests user pressed another button 1`] = `
 <body>
   <div>
     <ion-button
@@ -28,7 +28,7 @@ exports[`Kanji Button tests button changes when user makes a choice 2`] = `
 </body>
 `;
 
-exports[`Kanji Button tests button changes when user makes a choice 3`] = `
+exports[`Kanji Button tests user pressed another button, but this one was correct 1`] = `
 <body>
   <div>
     <ion-button

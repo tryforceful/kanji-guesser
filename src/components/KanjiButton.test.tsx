@@ -1,18 +1,16 @@
-import React from 'react'
-import KanjiButton from './KanjiButton';
-import { SettingsProvider } from '../state/SettingsContext';
-
+//import "@testing-library/jest-dom/extend-expect"
 //import renderer from 'react-test-renderer'
-import { render } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect'
+import { render } from "@testing-library/react"
+import React from "react"
+import { SettingsProvider } from "../state/SettingsContext"
+import KanjiButton from "./KanjiButton"
 
 // import ReactDOM from "react-dom";
 // import { act } from "react-dom/test-utils";
 
 describe("Kanji Button tests", function() {
-
   beforeAll(() => {
-    Object.defineProperty(window, 'matchMedia', {
+    Object.defineProperty(window, "matchMedia", {
       writable: true,
       value: jest.fn().mockImplementation(query => ({
         matches: false,
@@ -22,9 +20,9 @@ describe("Kanji Button tests", function() {
         removeListener: jest.fn(), // deprecated
         addEventListener: jest.fn(),
         removeEventListener: jest.fn(),
-        dispatchEvent: jest.fn(),
-      })),
-    });
+        dispatchEvent: jest.fn()
+      }))
+    })
   })
 
   // let container;
@@ -37,75 +35,65 @@ describe("Kanji Button tests", function() {
   //   document.body.removeChild(container);
   //   container = null;
   // });
-  
-  test('renders without crashing', () => {
-    const { baseElement, unmount } = render(
-    <SettingsProvider>
-      <KanjiButton
-        thisButtonsKanji="信"
-        correctChoice="b"
-        userChoice={null}
-        onClick={()=>{}}
-      />
-    </SettingsProvider>
-    );
-    expect( baseElement ).toBeDefined();
-    unmount();
-  });
 
-  test('button changes when user makes a choice', () => {
+  test("renders without crashing", () => {
+    const { baseElement, unmount, getByText } = render(
+      <SettingsProvider>
+        <KanjiButton thisButtonsKanji="信" correctChoice="b" userChoice={null} onClick={() => {}} />
+      </SettingsProvider>
+    )
+    expect(baseElement).toBeDefined()
+    const _button = getByText("信")
+    unmount()
+    expect(_button).not.toBeInTheDocument()
+  })
 
-    //let component: renderer.ReactTestRenderer;
-    const { baseElement, unmount, debug, rerender, getByText } = render(
-        <SettingsProvider>
-          <KanjiButton
-            thisButtonsKanji="信"
-            correctChoice="b"
-            userChoice={null}
-            onClick={()=>{}}
-          />
-        </SettingsProvider>
-        );
-    debug();
+  test("button when user hasn't chosen yet", () => {
+    const { baseElement, getByText } = render(
+      <SettingsProvider>
+        <KanjiButton
+          thisButtonsKanji="信"
+          correctChoice="私"
+          userChoice={null}
+          onClick={() => {}}
+        />
+      </SettingsProvider>
+    )
 
-    expect(baseElement).toBeInTheDocument();
+    const _button = getByText("信")
+    expect(_button).not.toHaveClass("selected")
+    expect(_button).toHaveAttribute("color", "primary")
 
-      // toJSON, toTree, update, unmount, getInstance, root
-    expect(baseElement).toMatchSnapshot();
+    // toJSON, toTree, update, unmount, getInstance, root
+    expect(baseElement).toMatchSnapshot()
+  })
 
+  test("user pressed another button", () => {
     // incorrect choice
-    rerender(
-        <SettingsProvider>
-          <KanjiButton
-            thisButtonsKanji="信"
-            correctChoice="b"
-            userChoice={"a"}
-            onClick={()=>{}}
-          />
-        </SettingsProvider>
-    );
+    const { baseElement, getByText } = render(
+      <SettingsProvider>
+        <KanjiButton thisButtonsKanji="信" correctChoice="b" userChoice={"a"} onClick={() => {}} />
+      </SettingsProvider>
+    )
 
-    expect(baseElement).toMatchSnapshot();
-    let _button = getByText("信")
-    expect(_button).not.toHaveClass("selected");
-    expect(_button).toHaveAttribute("color", "danger");
+    expect(baseElement).toMatchSnapshot()
+    const _button = getByText("信")
+    expect(_button).not.toHaveClass("selected")
+    expect(_button).toHaveAttribute("color", "danger")
+  })
 
+  test("user pressed another button, but this one was correct", () => {
     // correct choice
-    rerender(
-        <SettingsProvider>
-          <KanjiButton
-            thisButtonsKanji="b"
-            correctChoice="b"
-            userChoice={"a"}
-            onClick={()=>{}}
-          />
-        </SettingsProvider>
-    );
-    expect(baseElement).toMatchSnapshot();
-    _button = getByText("b")
-    expect(_button).not.toHaveClass("selected");
-    expect(_button).toHaveAttribute("color", "success");
-
-    unmount();
-  });
+    const { baseElement, getByText } = render(
+      <SettingsProvider>
+        <KanjiButton thisButtonsKanji="b" correctChoice="b" userChoice={"a"} onClick={() => {}} />
+      </SettingsProvider>
+    )
+    expect(baseElement).toMatchSnapshot()
+    const _button = getByText("b")
+    expect(_button).not.toHaveClass("selected")
+    expect(_button).toHaveAttribute("color", "success")
+  })
 })
+
+//expect toBeDisabled
