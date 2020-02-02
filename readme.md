@@ -2,7 +2,7 @@
 
 by [@tryforceful](http://www.github.com/tryforceful)
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/c3e9fc64-5be8-44ac-a0e7-fb0e244fd3dc/deploy-status)](https://app.netlify.com/sites/kanji-guesser/deploys) [![CircleCI](https://circleci.com/gh/tryforceful/kanji-guesser.svg?style=svg)](https://circleci.com/gh/tryforceful/kanji-guesser) [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest) [![codecov](https://codecov.io/gh/tryforceful/kanji-guesser/branch/master/graph/badge.svg?token=KISxKZbenc)](https://codecov.io/gh/tryforceful/kanji-guesser)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c3e9fc64-5be8-44ac-a0e7-fb0e244fd3dc/deploy-status)](https://app.netlify.com/sites/kanji-guesser/deploys) [![CircleCI](https://circleci.com/gh/tryforceful/kanji-guesser.svg?style=shield&circle-token=614332bd0c386a59c83e47b62189da9cc74450af)](https://circleci.com/gh/tryforceful/kanji-guesser) [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest) [![codecov](https://codecov.io/gh/tryforceful/kanji-guesser/branch/master/graph/badge.svg?token=KISxKZbenc)](https://codecov.io/gh/tryforceful/kanji-guesser)
 
 Ionic web & mobile app to help train your Japanese kanji recognition.
 
