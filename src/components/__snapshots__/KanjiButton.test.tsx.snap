@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Kanji Button tests button changes when user makes a choice 1`] = `
+<body>
+  <div>
+    <ion-button
+      class="kanji-choice desktop"
+      color="primary"
+      fill="solid"
+    >
+      信
+    </ion-button>
+  </div>
+</body>
+`;
+
+exports[`Kanji Button tests button changes when user makes a choice 2`] = `
+<body>
+  <div>
+    <ion-button
+      class="kanji-choice desktop"
+      color="danger"
+      fill="solid"
+    >
+      信
+    </ion-button>
+  </div>
+</body>
+`;
+
+exports[`Kanji Button tests button changes when user makes a choice 3`] = `
+<body>
+  <div>
+    <ion-button
+      class="kanji-choice desktop"
+      color="success"
+      fill="solid"
+    >
+      b
+    </ion-button>
+  </div>
+</body>
+`;

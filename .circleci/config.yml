@@ -36,8 +36,9 @@ jobs:
       # run tests!
       - run: yarn test
 
-      # - run: # run coverage report
-      #     name: code-coverage
+       - run: # run coverage report
+            name: code-coverage
+            command: './node_modules/.bin/codecov --token=2f2c5d5b-318e-4970-ac74-e625bfb192f1'
       #     command: './node_modules/.bin/nyc report --reporter=text-lcov'
       # - store_artifacts: # special step to save test results as as artifact
       #     # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
