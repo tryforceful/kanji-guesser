@@ -6,8 +6,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --coverage --watchAll",
+    "test": "react-scripts test --coverage",
+    "testdev": "react-scripts test --coverage --watchAll --updateSnapshot",
     "eject": "react-scripts eject",
+    "codecov": "./node_modules/.bin/codecov -t 2f2c5d5b-318e-4970-ac74-e625bfb192f1",
     "": "",
     "prettier": "prettier --list-different 'src/**/*.ts' || (echo '\nPlease fix code formatting by running:\nnpm run prettier:fix\n'; exit 1)",
     "prettier:fix": "prettier --write 'src/**/*.ts'",
@@ -52,6 +54,7 @@
   "devDependencies": {
     "@capacitor/cli": "1.4.0",
     "codecov": "^3.6.4",
+    "jest-environment-happy-dom": "^0.0.41",
     "jest-serializer-html": "^7.0.0",
     "react-test-renderer": "^16.12.0",
     "ts-jest": "^25.1.0"

@@ -62,6 +62,7 @@ describe("Kanji Button tests", function() {
 
     const _button = getByText("信")
     expect(_button).not.toHaveClass("selected")
+    //expect(_button).not.toBeDisabled()
     expect(_button).toHaveAttribute("color", "primary")
 
     // toJSON, toTree, update, unmount, getInstance, root
@@ -79,6 +80,7 @@ describe("Kanji Button tests", function() {
     expect(baseElement).toMatchSnapshot()
     const _button = getByText("信")
     expect(_button).not.toHaveClass("selected")
+    //expect(_button).toBeDisabled()
     expect(_button).toHaveAttribute("color", "danger")
   })
 
@@ -92,6 +94,7 @@ describe("Kanji Button tests", function() {
     expect(baseElement).toMatchSnapshot()
     const _button = getByText("b")
     expect(_button).not.toHaveClass("selected")
+    //expect(_button).toBeDisabled()
     expect(_button).toHaveAttribute("color", "success")
   })
 })

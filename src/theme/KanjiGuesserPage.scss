@@ -90,6 +90,14 @@
   flex-direction: column;
   height: 100%;
 }
+
+.quiz-progress-bar {
+  --progress-background: #3a6cc5;
+  @at-root body.dark & {
+    --background: #1a1b1e;
+  }
+}
+
 .kanji-choice-grid {
   //max-width: 768px;
   margin: 5px;

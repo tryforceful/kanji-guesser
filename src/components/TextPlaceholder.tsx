@@ -14,7 +14,7 @@ const TextPlaceholder = styled.div`
     display: inline-block;
     border-radius: 6px;
     opacity: 0.5;
-    vertical-align: baseline;
+    vertical-align: top;
   `
 
 TextPlaceholder.defaultProps = {

@@ -8,6 +8,7 @@ import {
   IonLabel,
   IonMenuButton,
   IonPage,
+  IonProgressBar,
   IonTitle,
   IonToolbar
 } from "@ionic/react"
@@ -79,6 +80,14 @@ class KanjiGuesser extends React.Component<Props, State> {
     this.setState(state => ({ numIncorrect: state.numIncorrect + 1 }))
   }
 
+  get numRemaining(): number {
+    return QuizData.length - this.state.numCorrect - this.state.numIncorrect
+  }
+
+  get percentCompleted(): number {
+    return (this.state.numCorrect + this.state.numIncorrect) / QuizData.length
+  }
+
   get currentContentSlide() {
     switch (this.state.quizState) {
       case QuizzardState.InProgress:
@@ -106,29 +115,35 @@ class KanjiGuesser extends React.Component<Props, State> {
 
   render() {
     const QuizzardToolbar: JSX.Element = (
-      <IonToolbar>
-        <IonButtons slot="start">
-          <IonButton color="medium" size="default" onClick={this.startOver}>
-            <IonIcon slot="start" icon={exit} />
-            End Quiz
-          </IonButton>
-        </IonButtons>
-        <div slot="end">
-          <IonChip mode="ios" className="unclickable" color="primary">
-            <IonIcon icon={timer} />
-            {/* TODO: fix me pulling from QuizData directly  */}
-            <IonLabel>{QuizData.length - this.state.numCorrect - this.state.numIncorrect}</IonLabel>
-          </IonChip>
-          <IonChip mode="ios" className="unclickable" color="success">
-            <IonIcon icon={thumbsUp} />
-            <IonLabel>{this.state.numCorrect}</IonLabel>
-          </IonChip>
-          <IonChip mode="ios" className="unclickable" color="danger">
-            <IonIcon icon={thumbsDown} />
-            <IonLabel>{this.state.numIncorrect}</IonLabel>
-          </IonChip>
-        </div>
-      </IonToolbar>
+      <React.Fragment>
+        <IonToolbar>
+          <IonButtons slot="start">
+            <IonButton color="medium" size="default" onClick={this.startOver}>
+              <IonIcon slot="start" icon={exit} />
+              End Quiz
+            </IonButton>
+          </IonButtons>
+          <div slot="end">
+            <IonChip mode="ios" className="unclickable" color="primary">
+              <IonIcon icon={timer} />
+              {/* TODO: fix me pulling from QuizData directly  */}
+              <IonLabel>{this.numRemaining}</IonLabel>
+            </IonChip>
+            <IonChip mode="ios" className="unclickable" color="success">
+              <IonIcon icon={thumbsUp} />
+              <IonLabel>{this.state.numCorrect}</IonLabel>
+            </IonChip>
+            <IonChip mode="ios" className="unclickable" color="danger">
+              <IonIcon icon={thumbsDown} />
+              <IonLabel>{this.state.numIncorrect}</IonLabel>
+            </IonChip>
+          </div>
+        </IonToolbar>
+        <IonProgressBar
+          className="quiz-progress-bar"
+          value={this.percentCompleted}
+        ></IonProgressBar>
+      </React.Fragment>
     )
 
     return (

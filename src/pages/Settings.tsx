@@ -1,23 +1,4 @@
-import {
-  IonButtons,
-  IonContent,
-  IonHeader,
-  IonIcon,
-  IonItem,
-  IonLabel,
-  IonList,
-  IonListHeader,
-  IonMenuButton,
-  IonNote,
-  IonPage,
-  IonRadio,
-  IonRadioGroup,
-  IonSegment,
-  IonSegmentButton,
-  IonTitle,
-  IonToggle,
-  IonToolbar
-} from "@ionic/react"
+import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonListHeader, IonMenuButton, IonNote, IonPage, IonRadio, IonRadioGroup, IonSegment, IonSegmentButton, IonTitle, IonToggle, IonToolbar } from "@ionic/react"
 import { moon, star, starHalf, starOutline } from "ionicons/icons"
 import React from "react"
 import QuizQueryCard from "../components/QuizQueryCard"
@@ -56,30 +37,6 @@ const exampleQuizItem: QuizItem = {
 }
 
 const ListItems: React.FC<{}> = () => {
-  // const icons = [
-  //   flask,
-  //   wifi,
-  //   beer,
-  //   football,
-  //   basketball,
-  //   paperPlane,
-  //   americanFootball,
-  //   boat,
-  //   bluetooth,
-  //   build
-  // ]
-
-  // const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(x => {
-  //   return (
-  //     <IonItem key={x}>
-  //       <IonIcon icon={icons[x - 1]} slot="start" />
-  //       Item {x}
-  //       <div className="item-note" slot="end">
-  //         This is item # {x}
-  //       </div>
-  //     </IonItem>
-  //   )
-  // })
 
   const [settings, setSettings] = useSettings()
 
@@ -88,24 +45,21 @@ const ListItems: React.FC<{}> = () => {
   //   localState = settings
   // }, []) //empty array signifies only on first render
 
-  function toggleDarkMode(e: CustomEvent) {
+  function toggleDarkMode(e: CustomEvent): void
+  {
     document.body.classList.toggle("dark", e.detail.checked)
 
-    setSettings(prevState => ({ ...prevState, darkThemeOn: e.detail.checked })) //turn this into a reducer!!!
+    setSettings(prevState => ({ ...prevState, darkThemeOn: e.detail.checked }))
   }
 
-  function quizDifficultyToggled(e: CustomEvent): void {
-    //console.log(e.detail.value)
-
-    setSettings(prevState => ({ ...prevState, quizDifficulty: e.detail.value })) //turn this into a reducer!!!
+  function quizDifficultyToggled(e: CustomEvent): void
+  {
+    setSettings(prevState => ({ ...prevState, quizDifficulty: e.detail.value }))
   }
 
-  function kanaDisplayToggled(e: CustomEvent): void {
-    //console.log(e.detail.value)
-
-    setSettings(prevState => {
-      return { ...prevState, kanaDisplayChoice: e.detail.value }
-    }) //turn this into a reducer!!!
+  function kanaDisplayToggled(e: CustomEvent): void
+  {
+    setSettings(prevState => ({...prevState, kanaDisplayChoice: e.detail.value}))
   }
 
   return (

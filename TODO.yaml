@@ -6,3 +6,38 @@ TODO:
   - warn that going to settings/menu etc mid-quiz will kill the quiz
   - Color Blind:
       - In outline mode, the success and failure button responses look too similar
+
+Ideas:
+  - Different categories for the quiz like
+    - everyday
+    - business
+    - relationships
+    - travel
+    - legal
+  - Tips to regonize what the kanji could be. Share them when people get them wrong.
+  - Retake the same exam set they just took (or did earlier) so they can compare progress over time for a particular kanji/set
+#
+#
+# Out of the box, Create React App only supports overriding these Jest options:
+
+#   • clearMocks
+#   • collectCoverageFrom
+#   • coveragePathIgnorePatterns
+#   • coverageReporters
+#   • coverageThreshold
+#   • displayName
+#   • extraGlobals
+#   • globalSetup
+#   • globalTeardown
+#   • moduleNameMapper
+#   • resetMocks
+#   • resetModules
+#   • restoreMocks
+#   • snapshotSerializers
+#   • transform
+#   • transformIgnorePatterns
+#   • watchPathIgnorePatterns.
+
+# These options in your package.json Jest configuration are not currently supported by Create React App:
+
+#   • testEnvironment
