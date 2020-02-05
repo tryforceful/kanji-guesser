@@ -118,7 +118,7 @@ class KanjiGuesser extends React.Component<Props, State> {
       <React.Fragment>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonButton color="medium" size="default" onClick={this.startOver}>
+            <IonButton color="medium" size="default" onClick={this.finish}>
               <IonIcon slot="start" icon={exit} />
               End Quiz
             </IonButton>

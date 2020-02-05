@@ -3,7 +3,7 @@ import { moon, star, starHalf, starOutline } from "ionicons/icons"
 import React from "react"
 import QuizQueryCard from "../components/QuizQueryCard"
 import { QuizItem } from "../data/QuizData"
-import { KanaDisplay, QuizDifficulty, useSettings } from "../state/SettingsContext"
+import { KanaDisplay, QuizDifficulty, SettingsReducerActionType, useSettings } from "../state/SettingsContext"
 import "../theme/SettingsPage.scss"
 
 const ListPage: React.FC = () => {
@@ -47,19 +47,17 @@ const ListItems: React.FC<{}> = () => {
 
   function toggleDarkMode(e: CustomEvent): void
   {
-    document.body.classList.toggle("dark", e.detail.checked)
-
-    setSettings(prevState => ({ ...prevState, darkThemeOn: e.detail.checked }))
+    setSettings([SettingsReducerActionType.UPDATE, {darkThemeOn: e.detail.checked }])
   }
 
   function quizDifficultyToggled(e: CustomEvent): void
   {
-    setSettings(prevState => ({ ...prevState, quizDifficulty: e.detail.value }))
+    setSettings([SettingsReducerActionType.UPDATE, {quizDifficulty: e.detail.value }])
   }
 
   function kanaDisplayToggled(e: CustomEvent): void
   {
-    setSettings(prevState => ({...prevState, kanaDisplayChoice: e.detail.value}))
+    setSettings([SettingsReducerActionType.UPDATE, {kanaDisplayChoice: e.detail.value}])
   }
 
   return (

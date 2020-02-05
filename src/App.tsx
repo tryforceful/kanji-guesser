@@ -14,7 +14,7 @@ import "@ionic/react/css/text-alignment.css"
 import "@ionic/react/css/text-transformation.css"
 import "@ionic/react/css/typography.css"
 import { build, school } from "ionicons/icons"
-import React from "react"
+import React, { useCallback, useEffect } from "react"
 import { Redirect, Route } from "react-router-dom"
 import Menu from "./components/Menu"
 import { AppPage } from "./declarations"
@@ -22,7 +22,7 @@ import Home from "./pages/Home"
 import KanjiGuesserPage from "./pages/KanjiGuesserPage"
 import HeaderExample from "./pages/Sample"
 import Settings from "./pages/Settings"
-import { SettingsProvider } from "./state/SettingsContext"
+import { SettingsProvider, useDeviceStorageSettingsLoader } from "./state/SettingsContext"
 /* Theme variables */
 import "./theme/main.scss"
 
@@ -49,23 +49,42 @@ const appPages: AppPage[] = [
   // }
 ]
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonSplitPane contentId="main">
-        <Menu appPages={appPages} />
-        <SettingsProvider>
-          <IonRouterOutlet id="main">
-            <Route path="/home" component={Home} exact={true} />
-            <Route path="/settings" component={Settings} exact={true} />
-            <Route path="/kanji-guess" component={KanjiGuesserPage} exact={true} />
-            <Route path="/sample" component={HeaderExample} exact={true} />
-            <Route path="/" render={() => <Redirect to="/kanji-guess" />} exact={true} />
-          </IonRouterOutlet>
-        </SettingsProvider>
-      </IonSplitPane>
-    </IonReactRouter>
-  </IonApp>
-)
+const ScreenLoader: React.FC = () => {
+  
+  const loadSettingsFromDeviceStorage = useCallback(useDeviceStorageSettingsLoader(), []);
+  
+  useEffect(() => {
+    // on load
+    loadSettingsFromDeviceStorage();
+  }, [loadSettingsFromDeviceStorage])
+
+  return (
+    /* TODO: add a loading spinner here eventually */
+    <div></div>
+  )
+}
+
+const App: React.FC = () => {
+
+  return (
+    <IonApp>
+      <SettingsProvider>
+        <IonReactRouter>
+          <ScreenLoader/>
+          <IonSplitPane contentId="main">
+            <Menu appPages={appPages} />
+              <IonRouterOutlet id="main">
+                <Route path="/home" component={Home} exact={true} />
+                <Route path="/settings" component={Settings} exact={true} />
+                <Route path="/kanji-guess" component={KanjiGuesserPage} exact={true} />
+                <Route path="/sample" component={HeaderExample} exact={true} />
+                <Route path="/" render={() => <Redirect to="/kanji-guess" />} exact={true} />
+              </IonRouterOutlet>
+          </IonSplitPane>
+        </IonReactRouter>
+      </SettingsProvider>
+    </IonApp>
+  )
+}
 
 export default App
